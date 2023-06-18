@@ -1,0 +1,70 @@
+@top Program { program }
+program { (Comment | literal | UppercaseName | Keyword | else )* }
+
+// Supported literals are numbers and strings
+literal { Number | String }
+
+// All possible kinds of literal numbers in Gleam
+Number { Decimal | Hex | Octal | Binary | Float }
+
+// A string is composed of a pair of enclosing \" and an
+// optional body
+@skip {} { String { '"' stringBody? '"' } }
+
+// Gleam reserved keywords
+Keyword {
+    "pub" 
+  | "fn"
+  | "type"
+  | "import"
+  | "if"
+  | "case"
+  | "external"
+  | "let"
+  | "assert"
+  | "use"
+  | "todo"
+  | "panic"
+}
+
+// Skip any comment or space between tokens
+@skip { space Comment }
+
+@tokens {
+  @precedence {
+    "\""
+    Float Hex Octal Binary Decimal
+    space
+    UppercaseName
+    "pub" "fn" "type" "import" "if" "case" "external" "let" "assert" "use" "todo" "panic"
+    Comment
+    else
+  }
+
+  // Any uppercase name (a type name, a constructor, ...)
+  UppercaseName { $[A-Z] $[0-9a-zA-Z]* }
+
+  // Regexes (kind of) for Gleam different number literals
+  Float { "-"? $[0-9\_]+ "\." $[0-9\_]* ("e" "-"? $[0-9\_]+)? }
+  Hex { "-"? "0" $[xX] $[0-9a-fA-F\_]+ }
+  Decimal { "-"? $[0-9] $[0-9\_]* }
+  Octal { "-"? "0" $[oO] $[0-7\_]+ }
+  Binary { "-"? "0" $[bB] $[0-1\_]+ }
+
+  // A string body can be composed of anything except a " or an
+  // unescaped \. It can also contain an escape sequence
+  stringBody { (!["\\] | "\\" $["nrt\\])+ }
+
+  // Ignored whitespace
+  space { (' ' | '\n' | '\t' | '\r')+ }
+
+  // Comments, for now there's no need to make a distinction
+  // between the different kinds of comments and the "//" prefix
+  // already catches all of them
+  Comment { "//" ![\n]* }
+
+  // A fallback that matches any other character in case all
+  // else fails. Needed to get a nice output and avoid strange
+  // overlapping tokens!
+  else { _ }
+}

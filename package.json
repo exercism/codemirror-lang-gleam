@@ -1,0 +1,47 @@
+{
+    "name": "@giacomocavalieri/codemirror-lang-gleam",
+    "description": "Gleam Lezer parser and language support for CodeMirror",
+    "author": "Giacomo Cavalieri <giacomo.cavalieri@icloud.com>",
+    "version": "1.0.0",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/giacomocavalieri/codemirror-lang-gleam"
+    },
+    "imports": {
+        "#parser": "./src/lezer/parser.js"
+    },
+    "type": "module",
+    "main": "dist/index.cjs",
+    "module": "dist/index.es.js",
+    "exports": {
+        "import": "./dist/index.es.js",
+        "require": "./dist/index.cjs"
+    },
+    "types": "index.d.ts",
+    "scripts": {
+        "prepare": "npm run build",
+        "build": "npm run build-grammar && rollup -c",
+        "build-debug": "lezer-generator src/lezer/gleam.grammar --names -o src/lezer/parser && rollup -c",
+        "build-grammar": "lezer-generator src/lezer/gleam.grammar -o src/lezer/parser",
+        "build-devtool": "npm run build-grammar && rollup -c rollup.config.devtool.js"
+    },
+    "dependencies": {
+        "@codemirror/autocomplete": "^0.19.4",
+        "@codemirror/highlight": "^0.19.6",
+        "@codemirror/language": "^0.19.3"
+    },
+    "devDependencies": {
+        "@codemirror/basic-setup": "0.19",
+        "@lezer/generator": "^0.15.2",
+        "@rollup/plugin-node-resolve": "^13.0.6",
+        "colors": "^1.4.0",
+        "lezer": "^0.13.5",
+        "mocha": "^9.0.0",
+        "rollup": "^2.50.4"
+    },
+    "files": [
+        "dist",
+        "index.d.ts"
+    ]
+}
