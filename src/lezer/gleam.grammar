@@ -1,5 +1,5 @@
 @top Program { program }
-program { (Comment | literal | UppercaseName | Keyword | else )* }
+program { (Comment | literal | UppercaseName | Keyword | LowercaseIdentifier | else)* }
 
 // Supported literals are numbers and strings
 literal { Number | String }
@@ -12,20 +12,22 @@ Number { Decimal | Hex | Octal | Binary | Float }
 @skip {} { String { '"' stringBody? '"' } }
 
 // Gleam reserved keywords
+keyword<term> { @specialize<LowercaseIdentifier, term> }
 Keyword {
-    "pub" 
-  | "fn"
-  | "type"
-  | "import"
-  | "if"
-  | "case"
-  | "external"
-  | "let"
-  | "assert"
-  | "use"
-  | "todo"
-  | "panic"
+    keyword<"pub">
+  | keyword<"fn">
+  | keyword<"type">
+  | keyword<"import">
+  | keyword<"if">
+  | keyword<"case">
+  | keyword<"external">
+  | keyword<"let">
+  | keyword<"assert">
+  | keyword<"use">
+  | keyword<"todo">
+  | keyword<"panic">
 }
+
 
 // Skip any comment or space between tokens
 @skip { space Comment }
@@ -36,10 +38,13 @@ Keyword {
     Float Hex Octal Binary Decimal
     space
     UppercaseName
-    "pub" "fn" "type" "import" "if" "case" "external" "let" "assert" "use" "todo" "panic"
     Comment
+    LowercaseIdentifier
     else
   }
+
+  // A gleam identifier
+  LowercaseIdentifier { $[\_a-z] $[0-9a-zA-Z\_]* }
 
   // Any uppercase name (a type name, a constructor, ...)
   UppercaseName { $[A-Z] $[0-9a-zA-Z]* }

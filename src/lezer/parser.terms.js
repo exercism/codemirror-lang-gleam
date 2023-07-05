@@ -10,4 +10,5 @@ export const
   Float = 8,
   String = 9,
   UppercaseName = 10,
-  Keyword = 11
+  Keyword = 11,
+  LowercaseIdentifier = 12
