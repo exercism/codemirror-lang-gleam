@@ -11,7 +11,7 @@ export const gleamLanguage = LRLanguage.define({
         "Comment": t.comment,
         "Number Decimal Hex Octal Binary Float": t.number,
         "String": t.string,
-        "UppercaseName": t.typeName,
+        "UppercaseIdentifier": t.typeName,
         "Keyword": t.keyword,
       })
     ]

@@ -1,5 +1,5 @@
 @top Program { program }
-program { (Comment | literal | UppercaseName | Keyword | LowercaseIdentifier | else)* }
+program { (Comment | literal | UppercaseIdentifier | Keyword | LowercaseIdentifier | else)* }
 
 // Supported literals are numbers and strings
 literal { Number | String }
@@ -28,26 +28,21 @@ Keyword {
   | keyword<"panic">
 }
 
-
-// Skip any comment or space between tokens
-@skip { space Comment }
-
 @tokens {
   @precedence {
     "\""
     Float Hex Octal Binary Decimal
-    space
-    UppercaseName
+    UppercaseIdentifier
     Comment
     LowercaseIdentifier
     else
   }
 
-  // A gleam identifier
+  // A Gleam lowercase identifier (variables, function names, ...)
   LowercaseIdentifier { $[\_a-z] $[0-9a-zA-Z\_]* }
 
-  // Any uppercase name (a type name, a constructor, ...)
-  UppercaseName { $[A-Z] $[0-9a-zA-Z]* }
+  // A Gleam uppercase identifier (a type name, a constructor, ...)
+  UppercaseIdentifier { $[A-Z] $[0-9a-zA-Z]* }
 
   // Regexes (kind of) for Gleam different number literals
   Float { "-"? $[0-9\_]+ "\." $[0-9\_]* ("e" "-"? $[0-9\_]+)? }
@@ -58,10 +53,7 @@ Keyword {
 
   // A string body can be composed of anything except a " or an
   // unescaped \. It can also contain an escape sequence
-  stringBody { (!["\\] | "\\" $["nrt\\])+ }
-
-  // Ignored whitespace
-  space { (' ' | '\n' | '\t' | '\r')+ }
+  stringBody { (!["\\] | "\\n" | "\\r" | "\\t" | "\\\"")+ }
 
   // Comments, for now there's no need to make a distinction
   // between the different kinds of comments and the "//" prefix
