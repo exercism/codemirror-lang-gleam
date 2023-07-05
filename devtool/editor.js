@@ -43,7 +43,22 @@ let editor = new EditorView({
       highlightStyle
     ],
     // theme: "tomorrow-night-eighties",
-    doc: `//// Result represents the result of something that may succeed or not.
+    doc: `
+pub fn square_of_sum(n: Int) -> Int {
+  let sum = n * { n + 1 } / 2
+  sum * sum
+}
+
+pub fn sum_of_squares(n: Int) -> Int {
+  n * { n + 1 } * { 2 * n + 1 } / 6
+}
+
+pub fn difference_todo_prova_public(n: Int) -> Int {
+  square_of_sum(n) - sum_of_squares(n)
+}
+        
+    
+//// Result represents the result of something that may succeed or not.
 //// \`Ok\` means it was successful, \`Error\` means it was not successful.
 
 import gleam/list
