@@ -1,5 +1,7 @@
 # codemirror-lang-gleam
 
+[![NPM Version](https://img.shields.io/npm/v/@exercism/codemirror-lang-gleam)](https://www.npmjs.com/package/@exercism/codemirror-lang-gleam)
+
 This package implements basic Gleam language support for the
 [CodeMirror](https://codemirror.net/6/) code editor.
 
