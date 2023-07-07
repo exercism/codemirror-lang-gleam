@@ -14,18 +14,19 @@ Number { Decimal | Hex | Octal | Binary | Float }
 // Gleam reserved keywords
 keyword<term> { @specialize<LowercaseIdentifier, term> }
 Keyword {
-    keyword<"pub">
-  | keyword<"fn">
-  | keyword<"type">
-  | keyword<"import">
-  | keyword<"if">
+    keyword<"assert">
   | keyword<"case">
+  | keyword<"const">
   | keyword<"external">
+  | keyword<"fn">
+  | keyword<"if">
+  | keyword<"import">
+  | keyword<"type">
   | keyword<"let">
-  | keyword<"assert">
-  | keyword<"use">
-  | keyword<"todo">
   | keyword<"panic">
+  | keyword<"pub">
+  | keyword<"todo">
+  | keyword<"use">
 }
 
 @tokens {
