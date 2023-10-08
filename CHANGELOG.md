@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Add `const` to the highlighted keywords
+- Add `const` and `opaque` to the highlighted keywords
 
 ## Version 1.0.1
 
