@@ -27,6 +27,7 @@ Keyword {
   | keyword<"pub">
   | keyword<"todo">
   | keyword<"use">
+  | keyword<"opaque">
 }
 
 @tokens {
