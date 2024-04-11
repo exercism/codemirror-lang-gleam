@@ -1,6 +1,8 @@
-import { EditorState, EditorView, basicSetup } from "@codemirror/basic-setup"
-import { gleam } from "../src/index.js"
-import { HighlightStyle, tags as t } from "@codemirror/highlight"
+import { EditorState } from "@codemirror/state";
+import { EditorView } from "@codemirror/view";
+import { basicSetup } from "codemirror";
+import { gleam } from "../src/index.js";
+import { HighlightStyle, tags as t } from "@lezer/highlight";
 
 const highlightStyle = HighlightStyle.define([
   { tag: t.link, class: "cmt-link" },
@@ -21,7 +23,10 @@ const highlightStyle = HighlightStyle.define([
   { tag: [t.regexp, t.escape, t.special(t.string)], class: "cmt-string2" },
   { tag: t.variableName, class: "cmt-variableName" },
   { tag: t.local(t.variableName), class: "cmt-variableName cmt-local" },
-  { tag: t.definition(t.variableName), class: "cmt-variableName cmt-definition" },
+  {
+    tag: t.definition(t.variableName),
+    class: "cmt-variableName cmt-definition",
+  },
   { tag: t.special(t.variableName), class: "cmt-variableName2" },
   { tag: t.typeName, class: "cmt-typeName" },
   { tag: t.namespace, class: "cmt-namespace" },
@@ -31,17 +36,12 @@ const highlightStyle = HighlightStyle.define([
   { tag: t.comment, class: "cmt-comment" },
   { tag: t.meta, class: "cmt-meta" },
   { tag: t.invalid, class: "cmt-invalid" },
-  { tag: t.punctuation, class: "cmt-punctuation" }
-])
-
+  { tag: t.punctuation, class: "cmt-punctuation" },
+]);
 
 let editor = new EditorView({
   state: EditorState.create({
-    extensions: [
-      basicSetup,
-      gleam({}),
-      highlightStyle
-    ],
+    extensions: [basicSetup, gleam({}), highlightStyle],
     // theme: "tomorrow-night-eighties",
     doc: `
 pub fn square_of_sum(n: Int) -> Int {
@@ -540,7 +540,7 @@ pub fn try_recover(
     Ok(value) -> Ok(value)
     Error(error) -> fun(error)
   }
-}`
+}`,
   }),
-  parent: document.body
-})
+  parent: document.body,
+});
