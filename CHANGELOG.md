@@ -1,7 +1,8 @@
 # Changelog
 
-## Unreleased
+## Version 2.0.0
 
+- Updated for CodeMirror v6.0.0.
 - Add `const` and `opaque` to the highlighted keywords
 
 ## Version 1.0.1

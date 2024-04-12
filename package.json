@@ -2,7 +2,7 @@
   "name": "@exercism/codemirror-lang-gleam",
   "description": "Gleam Lezer parser and language support for CodeMirror",
   "author": "Giacomo Cavalieri <giacomo.cavalieri@icloud.com>",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "license": "MIT",
   "repository": {
     "type": "git",
