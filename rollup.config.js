@@ -5,7 +5,7 @@ export default {
   external: [
     "@codemirror/language",
     "@lezer/highlight",
-    // "@codemirror/autocomplete",
+    "@codemirror/autocomplete",
     "@lezer/lr",
     "@lezer/common",
   ],

@@ -27,6 +27,7 @@
     "build-devtool": "npm run build-grammar && rollup -c rollup.config.devtool.js"
   },
   "dependencies": {
+    "@codemirror/autocomplete": "^6.15.0",
     "@codemirror/language": "^6.10.1",
     "@lezer/highlight": "^1.2.0",
     "@lezer/lr": "^1.4.0"
