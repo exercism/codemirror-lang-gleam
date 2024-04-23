@@ -1,5 +1,11 @@
 # Changelog
 
+
+## Version 2.0.1
+
+- Fixed rollup configuration: Updated the external array in rollup.config to include the correct package references.
+
+
 ## Version 2.0.0
 
 - Updated for CodeMirror v6.0.0.
