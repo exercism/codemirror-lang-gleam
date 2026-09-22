@@ -166,3 +166,8 @@
 - name: "paused"
   description: "Work paused until further notice"
   color: "e4e669"
+
+# This Exercism-wide label queues a PR's English for translation (see exercism/i18n)
+- name: "ready-to-translate"
+  description: "The English in this PR is final; queue its translations"
+  color: "1d76db"
